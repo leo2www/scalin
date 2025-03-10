@@ -8,7 +8,8 @@ val scalaCheckVersion = "1.13.5"
 val scalaMacrosVersion = "2.1.0"
 val scalaTestVersion = "3.0.5"
 val spireVersion = "0.16.0"
-val alascVersion = "0.16.0.0"
+// val alascVersion = "0.16.0.3"
+val alascVersion = "0.16.0.4-SNAPSHOT-withlaw"
 
 lazy val scalin = (project in file("."))
   .settings(moduleName := "scalin")
@@ -23,7 +24,7 @@ lazy val macros = (project in file("macros"))
   .settings(commonJvmSettings: _*)
 
 lazy val core = (project in file("core"))
-  .enablePlugins(TutPlugin)
+  //.enablePlugins(TutPlugin)
   .settings(moduleName := "scalin-core")
   .settings(scalinSettings: _*)
   .settings(scalaTestSettings: _*)
@@ -59,7 +60,59 @@ lazy val commonSettings = Seq(
   )),
   resolvers ++= Seq(
     "bintray/denisrosset/maven" at "https://dl.bintray.com/denisrosset/maven",
-    Resolver.sonatypeRepo("snapshots")
+    Resolver.sonatypeRepo("snapshots"),
+    //  常用仓库
+    Resolver.sonatypeRepo("snapshots"),
+    Resolver.sonatypeRepo("releases"),
+    // ---------------------------
+    // 国内镜像源（加速下载）
+    // ---------------------------
+    "Aliyun Maven" at "https://maven.aliyun.com/repository/public",
+    "Huawei Cloud" at "https://repo.huaweicloud.com/repository/maven",
+    
+    // ---------------------------
+    // 官方中央仓库
+    // ---------------------------
+    "Maven Central" at "https://repo1.maven.org/maven2",
+    
+    // ---------------------------
+    // Sonatype 仓库体系
+    // ---------------------------
+    "Sonatype Releases"  at "https://oss.sonatype.org/content/repositories/releases",
+    "Sonatype Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots",
+    
+    // ---------------------------
+    // 常用第三方仓库
+    // ---------------------------
+    // JitPack（GitHub项目直连）
+    "jitpack.io" at "https://jitpack.io",
+    
+    // JBoss 仓库
+    "JBoss Repository" at "https://repository.jboss.org/nexus/content/repositories/releases",
+    
+    // Apache 快照仓库
+    "Apache Snapshots" at "https://repository.apache.org/content/repositories/snapshots",
+    
+    // Clojars (Clojure 生态库)
+    "Clojars" at "https://clojars.org/repo",
+    
+    // Spring 插件仓库
+    // "Spring Plugins" at "https://repo.spring.io/plugins-release",
+    
+    // Gradle 插件仓库
+    "Gradle Plugins" at "https://plugins.gradle.org/m2",
+    
+    // ---------------------------
+    // 云厂商仓库
+    // ---------------------------
+    // AWS 仓库
+    "AWS Release" at "https://aws.oss.sonatype.org/content/repositories/releases",
+    
+    // 腾讯云镜像（备用）
+    "Tencent Cloud" at "https://mirrors.cloud.tencent.com/nexus/repository/maven-public",
+    // 本地构建器
+    Resolver.mavenLocal,
+    Resolver.file("local-ivy", file(Path.userHome.absolutePath + "/.ivy2/local"))(Resolver.ivyStylePatterns),
   ),
   libraryDependencies ++= Seq("org.typelevel" %% "spire" % spireVersion)
 ) ++ scalaMacroDependencies ++ warnUnusedImport
