@@ -2,7 +2,7 @@
 
 val scala210Version = "2.10.7"
 val scala211Version = "2.11.12"
-val scala212Version = "2.12.6"
+val scala212Version = "2.12.0"
 val disciplineVersion = "0.8"
 val scalaCheckVersion = "1.13.5"
 val scalaMacrosVersion = "2.1.0"
